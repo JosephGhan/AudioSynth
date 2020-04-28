@@ -31,6 +31,7 @@
             this.oscillator1 = new AudioSynth.Oscillator();
             this.oscillator2 = new AudioSynth.Oscillator();
             this.oscillator3 = new AudioSynth.Oscillator();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // oscillator1
@@ -60,11 +61,21 @@
             this.oscillator3.TabStop = false;
             this.oscillator3.Text = "oscillator3";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(55, 417);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(35, 13);
+            this.lblStatus.TabIndex = 3;
+            this.lblStatus.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.oscillator3);
             this.Controls.Add(this.oscillator2);
             this.Controls.Add(this.oscillator1);
@@ -74,6 +85,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -82,6 +94,7 @@
         private Oscillator oscillator1;
         private Oscillator oscillator2;
         private Oscillator oscillator3;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

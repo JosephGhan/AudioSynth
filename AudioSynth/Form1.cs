@@ -15,8 +15,9 @@ namespace AudioSynth
     {
         private const int SAMPLE_RATE = 44100;
         private const short BITS_PER_SAMPLE = 16;
-        bool isPlaying;
+        bool isPlaying = false;
         SoundPlayer sound = new SoundPlayer();
+        int started = 0;
 
         public Form1()
         {
@@ -121,7 +122,6 @@ namespace AudioSynth
             using (MemoryStream memoryStream = new MemoryStream())
             using (BinaryWriter binaryWriter = new BinaryWriter(memoryStream))
             {
-                isPlaying = false;
                 short blockAlign = BITS_PER_SAMPLE / 8;
                 int subChunkTwoSize = SAMPLE_RATE * blockAlign;
                 binaryWriter.Write(new[] { 'R', 'I', 'F', 'F' });
@@ -146,23 +146,22 @@ namespace AudioSynth
 
         private void PlaySound(SoundPlayer sound, bool play)
         {   
-            if (play)
-            {
-                if (!isPlaying)
-                {
+            if (play && !isPlaying)
+            { 
                     isPlaying = true;
+                    sound.Load();
                     sound.PlayLooping();
-                }
+                    started++;
             }
-            else
+            else if (!play && !isPlaying)
             {
-                isPlaying = false;
                 sound.Stop();
             }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            isPlaying = false;
             PlaySound(sound, false);
         }
     }
