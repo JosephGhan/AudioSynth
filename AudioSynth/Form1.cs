@@ -17,11 +17,13 @@ namespace AudioSynth
         private const short BITS_PER_SAMPLE = 16;
         bool isPlaying = false;
         SoundPlayer sound = new SoundPlayer();
-        int started = 0;
+        int octave = 4;
+        Notes note = new Notes();
 
         public Form1()
         {
             InitializeComponent();
+            //MessageBox.Show(note.frequency[octave, 0].ToString());
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -35,33 +37,53 @@ namespace AudioSynth
             int oscillatiorsCount = oscillators.Count();
             switch (e.KeyCode)
             {
-                case Keys.Z:
-                    frequency = 65.4f; //C2
-                    key = Keys.Z;
+                case Keys.Q:
+                    frequency = note.frequency[0, octave];
+                    key = Keys.Q;
                     break;
-                case Keys.X:
-                    frequency = 138.59f; //C3
-                    key = Keys.X;
+                case Keys.W:
+                    frequency = note.frequency[1, octave];
+                    key = Keys.W;
                     break;
-                case Keys.C:
-                    frequency = 261.62F; //C4
-                    key = Keys.C;
+                case Keys.E:
+                    frequency = note.frequency[2, octave];
+                    key = Keys.E;
                     break;
-                case Keys.V:
-                    frequency = 523.25f; //C5
-                    key = Keys.V;
+                case Keys.R:
+                    frequency = note.frequency[3, octave];
+                    key = Keys.R;
                     break;
-                case Keys.B:
-                    frequency = 1046.5f; //C6
-                    key = Keys.B;
+                case Keys.T:
+                    frequency = note.frequency[4, octave];
+                    key = Keys.T;
                     break;
-                case Keys.N:
-                    frequency = 2093f; //C7
-                    key = Keys.N;
+                case Keys.Y:
+                    frequency = note.frequency[5, octave];
+                    key = Keys.Y;
                     break;
-                case Keys.M:
-                    frequency = 4196.01f; //C8
-                    key = Keys.M;
+                case Keys.F:
+                    frequency = note.frequency[6, octave];
+                    key = Keys.F;
+                    break;
+                case Keys.G:
+                    frequency = note.frequency[7, octave];
+                    key = Keys.I;
+                    break;
+                case Keys.H:
+                    frequency = note.frequency[8, octave];
+                    key = Keys.H;
+                    break;
+                case Keys.J:
+                    frequency = note.frequency[9, octave];
+                    key = Keys.J;
+                    break;
+                case Keys.K:
+                    frequency = note.frequency[10, octave];
+                    key = Keys.K;
+                    break;
+                case Keys.L:
+                    frequency = note.frequency[11, octave];
+                    key = Keys.L;
                     break;
                 default:
                     return;
@@ -151,7 +173,7 @@ namespace AudioSynth
                     isPlaying = true;
                     sound.Load();
                     sound.PlayLooping();
-                    started++;
+                    //started++;
             }
             else if (!play && !isPlaying)
             {
@@ -163,6 +185,11 @@ namespace AudioSynth
         {
             isPlaying = false;
             PlaySound(sound, false);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            octave = Convert.ToInt32(comboBox1.SelectedIndex);
         }
     }
 
